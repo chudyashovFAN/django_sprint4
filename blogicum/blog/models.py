@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.contrib.auth import get_user_model
 
 
-
 User = get_user_model()
 
 
@@ -85,11 +84,12 @@ class Post(BaseModel):
         verbose_name_plural = 'Публикации'
 
     def get_absolute_url(self):
-        return reverse('blog:profile', kwargs={'username': self.author.username})
-        
+        return reverse(
+            'blog:profile', kwargs={'username': self.author.username}
+        )
+
     def __str__(self):
         return self.title
-
 
 
 class Comment(models.Model):
@@ -104,12 +104,12 @@ class Comment(models.Model):
         on_delete=models.CASCADE,
         related_name='post',
     )
-    
+
     def get_absolute_url(self):
         return reverse('blog:post_detail', kwargs={"post_id": self.post_id})
-    
+
     class Meta:
         ordering = ('created_at',)
-        
+
     def __str__(self):
         return str(self.post.id)
