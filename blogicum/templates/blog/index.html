@@ -3,6 +3,7 @@
   Лента записей
 {% endblock %}
 {% block content %}
+{{ comments_count }}
   {% for post in page_obj %}
     <article class="mb-5">
       {% include "includes/post_card.html" %}
